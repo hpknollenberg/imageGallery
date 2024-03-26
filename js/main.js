@@ -10,6 +10,7 @@ const btnTwo = document.querySelector('#button-2');
 const overlayOne = document.querySelector('.overlay');
 const overlayTwo = document.querySelector('.overlay-2');
 
+overlayTwo.style.width = displayedImageTwo.offsetWidth + "px";
 
 //Declaring the file name and alternative text for each image file
 const pictures = [{name: "img/pic1.jpg", alt: "Closeup of a human eye"},
@@ -25,8 +26,8 @@ const sandmanPictures = [{name: "img_sandman/death.jpg", alt: "A closeup of Deat
                 {name: "img_sandman/destiny.jpg", alt: "A medium shot of Destiny"}]
 
 
-//Looping through images, listening for click
-function imageGallery(arr, thumbBar, displayedImage) {
+//Looping through images, listening for click, changes displayed image, changes overlay size
+function imageGallery(arr, thumbBar, displayedImage, overlay) {
     for (i = 0; i <= arr.length - 1; i++){
         const newImage = document.createElement('img');
         newImage.setAttribute('src', arr[i].name);
@@ -36,12 +37,13 @@ function imageGallery(arr, thumbBar, displayedImage) {
         newImage.addEventListener("click", () => {
             displayedImage.setAttribute('src', newImage.getAttribute('src'));
             displayedImage.setAttribute('alt', newImage.getAttribute('alt'));
-        });
+            overlay.style.width = displayedImage.offsetWidth + "px";
+        });    
     }
 }
 
-imageGallery(pictures, thumbBarOne, displayedImageOne);
-imageGallery(sandmanPictures, thumbBarTwo, displayedImageTwo);
+imageGallery(pictures, thumbBarOne, displayedImageOne, overlayOne);
+imageGallery(sandmanPictures, thumbBarTwo, displayedImageTwo, overlayTwo);
 
 
 //Wiring up the Darken/Lighten button
@@ -60,3 +62,6 @@ function darkenLighten(btn, overlay) {
 
 btnOne.addEventListener("click", () => {darkenLighten(btnOne, overlayOne)});
 btnTwo.addEventListener("click", () => {darkenLighten(btnTwo, overlayTwo)});
+
+
+
