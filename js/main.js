@@ -10,7 +10,13 @@ const btnTwo = document.querySelector('#button-2');
 const overlayOne = document.querySelector('.overlay');
 const overlayTwo = document.querySelector('.overlay-2');
 
+
+actualKeyPosition = 0;
+
+//set the size of the overlay
+overlayOne.style.width = displayedImageOne.offsetWidth + "px"; 
 overlayTwo.style.width = displayedImageTwo.offsetWidth + "px";
+
 
 //Declaring the file name and alternative text for each image file
 const pictures = [{name: "img/pic1.jpg", alt: "Closeup of a human eye"},
@@ -23,7 +29,7 @@ const sandmanPictures = [{name: "img_sandman/death.jpg", alt: "A closeup of Deat
                 {name: "img_sandman/delirium.jpg", alt: "A closeup of Delirium's face with a quote reading 'Our existence deforms the universe. This is responsibility.'"},
                 {name: "img_sandman/desire.jpg", alt: "A closeup of Desire's face"},
                 {name: "img_sandman/despair.jpg", alt: "A closeup of Despair's face, picture frames of her in the background"},
-                {name: "img_sandman/destiny.jpg", alt: "A medium shot of Destiny"}]
+                {name: "img_sandman/destiny.jpg", alt: "A medium shot of Destiny"}];
 
 
 //Looping through images, listening for click, changes displayed image, changes overlay size
@@ -38,7 +44,9 @@ function imageGallery(arr, thumbBar, displayedImage, overlay) {
             displayedImage.setAttribute('src', newImage.getAttribute('src'));
             displayedImage.setAttribute('alt', newImage.getAttribute('alt'));
             overlay.style.width = displayedImage.offsetWidth + "px";
-        });    
+            actualKeyPosition = arr.map(e => e.name).indexOf(displayedImage.getAttribute('src'));
+        });
+        
     }
 }
 
@@ -64,4 +72,38 @@ btnOne.addEventListener("click", () => {darkenLighten(btnOne, overlayOne)});
 btnTwo.addEventListener("click", () => {darkenLighten(btnTwo, overlayTwo)});
 
 
+console.log(actualKeyPosition);
 
+
+//keydown function
+document.body.addEventListener('keydown', function (event) {
+    const key = event.key;
+    switch (key) {
+        case "ArrowUp":
+            if (actualKeyPosition === 9) {
+                actualKeyPosition = 0;
+            } else {
+                actualKeyPosition++;
+            }
+            keyDisplayImage();
+            break;
+        case "ArrowDown":
+            if (actualKeyPosition === 0) {
+                actualKeyPosition = 9;
+            } else {
+                actualKeyPosition--;
+            }
+            keyDisplayImage();
+            break;
+    }
+})
+
+function keyDisplayImage() {
+    if (actualKeyPosition <= 4) {
+        displayedImageOne.setAttribute('src', pictures[actualKeyPosition].name); 
+        displayedImageOne.setAttribute('alt', pictures[actualKeyPosition].alt);
+    } else {
+        displayedImageTwo.setAttribute('src', sandmanPictures[actualKeyPosition - 5].name); 
+        displayedImageTwo.setAttribute('alt', sandmanPictures[actualKeyPosition - 5].alt);
+    }
+}
