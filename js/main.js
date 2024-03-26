@@ -13,7 +13,7 @@ const pictures = [{name: "img/pic1.jpg", alt: "Closeup of a human eye"},
                 {name: "img/pic5.jpg", alt: "Brown butterfly on a green leaf"}];
 
 //Looping through images, listening for click
-for (i = 0; i <= 4; i++){
+for (i = 0; i <= pictures.length - 1; i++){
     const newImage = document.createElement('img');
     newImage.setAttribute('src', pictures[i].name);
     newImage.setAttribute('alt', pictures[i].alt);
