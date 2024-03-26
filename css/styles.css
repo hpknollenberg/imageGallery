@@ -8,14 +8,19 @@ body {
     margin: 0 auto;
 }
 
-.full-img {
+.both-galleries {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.full-img, .full-img-2 {
     position: relative;
-    display: block;
+    display: flex;
     width: 640px;
     height: 480px;
 }
 
-.overlay {
+.overlay, .overlay-2 {
     position: absolute;
     top: 0;
     left: 0;
@@ -24,7 +29,7 @@ body {
     background-color: rgba(0,0,0,0);
 }
 
-button {
+#button, #button-2 {
     border: 0;
     background: rgba(150,150,150,0.6);
     text-shadow: 1px 1px 1px white;
@@ -35,9 +40,10 @@ button {
     left: 2px;
 }
 
-.thumb-bar img {
+.thumb-bar img, .thumb-bar-2 img {
     display: block;
     width: 20%;
     float: left;
     cursor: pointer;
+    margin-bottom: 10px;
 }

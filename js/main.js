@@ -1,8 +1,14 @@
-const displayedImage = document.querySelector('.displayed-img');
-const thumbBar = document.querySelector('.thumb-bar');
+const displayedImageOne = document.querySelector('.displayed-img');
+const displayedImageTwo = document.querySelector('.displayed-img-2');
 
-const btn = document.querySelector('button');
-const overlay = document.querySelector('.overlay');
+const thumbBarOne = document.querySelector('.thumb-bar');
+const thumbBarTwo = document.querySelector('.thumb-bar-2');
+
+const btnOne = document.querySelector('#button');
+const btnTwo = document.querySelector('#button-2');
+
+const overlayOne = document.querySelector('.overlay');
+const overlayTwo = document.querySelector('.overlay-2');
 
 
 //Declaring the file name and alternative text for each image file
@@ -12,21 +18,35 @@ const pictures = [{name: "img/pic1.jpg", alt: "Closeup of a human eye"},
                 {name: "img/pic4.jpg", alt: "Hieroglyphics"},
                 {name: "img/pic5.jpg", alt: "Brown butterfly on a green leaf"}];
 
+const sandmanPictures = [{name: "img_sandman/death.jpg", alt: "A closeup of Death's face"},
+                {name: "img_sandman/delirium.jpg", alt: "A closeup of Delirium's face with a quote reading 'Our existence deforms the universe. This is responsibility.'"},
+                {name: "img_sandman/desire.jpg", alt: "A closeup of Desire's face"},
+                {name: "img_sandman/despair.jpg", alt: "A closeup of Despair's face, picture frames of her in the background"},
+                {name: "img_sandman/destiny.jpg", alt: "A medium shot of Destiny"}]
+
+
 //Looping through images, listening for click
-for (i = 0; i <= pictures.length - 1; i++){
-    const newImage = document.createElement('img');
-    newImage.setAttribute('src', pictures[i].name);
-    newImage.setAttribute('alt', pictures[i].alt);
-    thumbBar.appendChild(newImage);
+function imageGallery(arr, thumbBar, displayedImage) {
+    for (i = 0; i <= arr.length - 1; i++){
+        const newImage = document.createElement('img');
+        newImage.setAttribute('src', arr[i].name);
+        newImage.setAttribute('alt', arr[i].alt);
+        thumbBar.appendChild(newImage);
     
-    newImage.addEventListener("click", () => {
-        displayedImage.setAttribute('src', newImage.getAttribute('src'));
-        displayedImage.setAttribute('alt', newImage.getAttribute('alt'));
-    });
+        newImage.addEventListener("click", () => {
+            displayedImage.setAttribute('src', newImage.getAttribute('src'));
+            displayedImage.setAttribute('alt', newImage.getAttribute('alt'));
+        });
+    }
 }
 
+imageGallery(pictures, thumbBarOne, displayedImageOne);
+imageGallery(sandmanPictures, thumbBarTwo, displayedImageTwo);
+
+
 //Wiring up the Darken/Lighten button
-btn.addEventListener("click", () => {
+
+function darkenLighten(btn, overlay) {
     if (btn.getAttribute("class") === "dark") {
         btn.setAttribute("class", "light");
         btn.textContent = "Lighten";
@@ -36,4 +56,7 @@ btn.addEventListener("click", () => {
         btn.textContent = "Darken";
         overlay.style.backgroundColor = "rgb(0 0 0 / 0%)";
     }
-});
+}
+
+btnOne.addEventListener("click", () => {darkenLighten(btnOne, overlayOne)});
+btnTwo.addEventListener("click", () => {darkenLighten(btnTwo, overlayTwo)});
