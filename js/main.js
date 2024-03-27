@@ -44,7 +44,11 @@ function imageGallery(arr, thumbBar, displayedImage, overlay) {
             displayedImage.setAttribute('src', newImage.getAttribute('src'));
             displayedImage.setAttribute('alt', newImage.getAttribute('alt'));
             overlay.style.width = displayedImage.offsetWidth + "px";
-            actualKeyPosition = arr.map(e => e.name).indexOf(displayedImage.getAttribute('src'));
+            if (displayedImage == displayedImageOne) {
+                actualKeyPosition = arr.map(e => e.name).indexOf(displayedImage.getAttribute('src'));
+            } else {
+                actualKeyPosition = arr.map(e => e.name).indexOf(displayedImage.getAttribute('src')) + 5;
+            }
         });
         
     }
@@ -55,7 +59,6 @@ imageGallery(sandmanPictures, thumbBarTwo, displayedImageTwo, overlayTwo);
 
 
 //Wiring up the Darken/Lighten button
-
 function darkenLighten(btn, overlay) {
     if (btn.getAttribute("class") === "dark") {
         btn.setAttribute("class", "light");
@@ -70,9 +73,6 @@ function darkenLighten(btn, overlay) {
 
 btnOne.addEventListener("click", () => {darkenLighten(btnOne, overlayOne)});
 btnTwo.addEventListener("click", () => {darkenLighten(btnTwo, overlayTwo)});
-
-
-console.log(actualKeyPosition);
 
 
 //keydown function
