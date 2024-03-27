@@ -81,19 +81,25 @@ document.body.addEventListener('keydown', function (event) {
     switch (key) {
         case "ArrowUp":
             if (actualKeyPosition === 9) {
-                actualKeyPosition = 0;
+                actualKeyPosition = 9;
+            } else if (actualKeyPosition === 4)  {
+                actualKeyPosition = 6;
             } else {
                 actualKeyPosition++;
             }
             keyDisplayImage();
+            event.preventDefault();
             break;
         case "ArrowDown":
             if (actualKeyPosition === 0) {
-                actualKeyPosition = 9;
+                actualKeyPosition = 0;
+            } else if (actualKeyPosition === 5) {
+                actualKeyPosition = 3;
             } else {
                 actualKeyPosition--;
             }
             keyDisplayImage();
+            event.preventDefault();
             break;
     }
 })
