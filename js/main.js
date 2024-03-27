@@ -44,7 +44,11 @@ function imageGallery(arr, thumbBar, displayedImage, overlay) {
             displayedImage.setAttribute('src', newImage.getAttribute('src'));
             displayedImage.setAttribute('alt', newImage.getAttribute('alt'));
             overlay.style.width = displayedImage.offsetWidth + "px";
-            actualKeyPosition = arr.map(e => e.name).indexOf(displayedImage.getAttribute('src'));
+            if (displayedImage == displayedImageOne) {
+                actualKeyPosition = arr.map(e => e.name).indexOf(displayedImage.getAttribute('src'));
+            } else {
+                actualKeyPosition = arr.map(e => e.name).indexOf(displayedImage.getAttribute('src')) + 5;
+            }
         });
         
     }
@@ -55,7 +59,6 @@ imageGallery(sandmanPictures, thumbBarTwo, displayedImageTwo, overlayTwo);
 
 
 //Wiring up the Darken/Lighten button
-
 function darkenLighten(btn, overlay) {
     if (btn.getAttribute("class") === "dark") {
         btn.setAttribute("class", "light");
@@ -72,28 +75,31 @@ btnOne.addEventListener("click", () => {darkenLighten(btnOne, overlayOne)});
 btnTwo.addEventListener("click", () => {darkenLighten(btnTwo, overlayTwo)});
 
 
-console.log(actualKeyPosition);
-
-
 //keydown function
 document.body.addEventListener('keydown', function (event) {
     const key = event.key;
     switch (key) {
         case "ArrowUp":
             if (actualKeyPosition === 9) {
-                actualKeyPosition = 0;
+                actualKeyPosition = 9;
+            } else if (actualKeyPosition === 4)  {
+                actualKeyPosition = 6;
             } else {
                 actualKeyPosition++;
             }
             keyDisplayImage();
+            event.preventDefault();
             break;
         case "ArrowDown":
             if (actualKeyPosition === 0) {
-                actualKeyPosition = 9;
+                actualKeyPosition = 0;
+            } else if (actualKeyPosition === 5) {
+                actualKeyPosition = 3;
             } else {
                 actualKeyPosition--;
             }
             keyDisplayImage();
+            event.preventDefault();
             break;
     }
 })
