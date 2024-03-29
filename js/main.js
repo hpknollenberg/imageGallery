@@ -109,8 +109,10 @@ function keyDisplayImage() {        //Displays image based on the key position
     if (actualKeyPosition <= 4) {
         displayedImageOne.setAttribute('src', pictures[actualKeyPosition].name); 
         displayedImageOne.setAttribute('alt', pictures[actualKeyPosition].alt);
+        overlayOne.style.width = displayedImageOne.offsetWidth + "px";
     } else {
         displayedImageTwo.setAttribute('src', sandmanPictures[actualKeyPosition - 5].name); 
         displayedImageTwo.setAttribute('alt', sandmanPictures[actualKeyPosition - 5].alt);
+        overlayTwo.style.width = displayedImageTwo.offsetWidth + "px";
     }
 }
