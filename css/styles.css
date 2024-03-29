@@ -4,13 +4,16 @@ h1 {
 }
 
 body {
-    width: 640px;
+    width: 1280px;
     margin: 0 auto;
 }
 
 .both-galleries {
     display: flex;
-    flex-flow: row wrap;
+}
+
+.first-gallery, .second-gallery {
+    padding: 5px;
 }
 
 .full-img, .full-img-2 {
@@ -18,15 +21,15 @@ body {
     display: flex;
     width: 640px;
     height: 480px;
+    justify-content: center;
 }
 
 .overlay, .overlay-2 {
     position: absolute;
-    top: 0;
-    left: 0;
     width: 640px;
     height: 480px;
     background-color: rgba(0,0,0,0);
+    justify-content: center;
 }
 
 #button, #button-2 {
@@ -36,7 +39,7 @@ body {
     border: 1px solid #999;
     position: absolute;
     cursor: pointer;
-    top: 2px;
+    bottom: 2px;
     left: 2px;
 }
 
